@@ -32,6 +32,7 @@ Data da coleta dos dados, preço, valor do frete
 Escolhi o Mercado Livre porque já fiz um script no passado para coletar alguns dados, então posso reutilizar algumas partes do código
 
 ## 4. Criar um script para obter os dados
+Fiz um notebook no Google Colab para testar de forma rápida as funções necessárias para o script
 
 
 
