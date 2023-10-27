@@ -62,6 +62,13 @@ Para rodar o script utilizei um Raspberry Pi 3 rodando o Ubuntu Server 23.04.
 <br>Clonei este repositório em uma pasta e configurei a execução diária do script utilizando o `crontab` que é um recurso capaz de executar comandos agendados dentro do sistema.
 Este [link](https://guialinux.uniriotec.br/crontab/)<sup>[1]</sup> possui uma explicação sobre o funcionamento deste recurso.
 
+## 6. Transformar os dados em informação de forma gráfica
+Em andamento...
+## 7. Analisar os resultados
+Em andamento...
+## 8. Comprar o celular
+Em andamento...
+
 ## Tecnologias utilizadas
 ![Static Badge](https://img.shields.io/badge/python-3.10-blue)
 ![Static Badge](https://img.shields.io/badge/requests-yellow)
