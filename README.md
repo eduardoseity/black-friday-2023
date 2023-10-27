@@ -26,7 +26,8 @@ Resolvi monitorar três celulares:
 - iPhone 15 Pro Max
 
 ## 2. Definir quais dados eu preciso obter
-Data da coleta dos dados, preço, valor do frete
+- Data da coleta dos dados
+- Preço
 
 ## 3. Escolher uma plataforma de e-commerce
 Escolhi o Mercado Livre porque já fiz um script no passado para coletar alguns dados, então posso reutilizar algumas partes do código
@@ -64,7 +65,6 @@ Este [link](https://guialinux.uniriotec.br/crontab/)<sup>[1]</sup> possui uma ex
 ## Tecnologias utilizadas
 ![Static Badge](https://img.shields.io/badge/python-3.10-blue)
 ![Static Badge](https://img.shields.io/badge/requests-yellow)
-![Static Badge](https://img.shields.io/badge/BeautifulSoup4-purple)
 ![Static Badge](https://img.shields.io/badge/pandas-brown)
 
 ## Referências
