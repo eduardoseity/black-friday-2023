@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from fuzzywuzzy import fuzz
 import pandas as pd
+import os
 
 def coletar_da_url(url: str, palavras_chaves: list) -> tuple:
     # Requisita a url
@@ -84,4 +85,6 @@ if __name__ == '__main__':
     
     # Concatena os DataFrames e salva o arquivo
     df = pd.concat(dfs)
+    if not os.path.exists('datasets'):
+        os.mkdir('datasets')
     df.to_csv('datasets/dados_coletados.csv',index=False)
