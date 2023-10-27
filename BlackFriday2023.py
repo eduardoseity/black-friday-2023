@@ -5,6 +5,8 @@ from fuzzywuzzy import fuzz
 import pandas as pd
 import os
 
+root_dir = os.path.dirname(__file__)
+
 def coletar_da_url(url: str, palavras_chaves: list) -> tuple:
     # Requisita a url
     req = requests.get(url)
@@ -67,14 +69,15 @@ def filtrar(items:list) -> dict:
     return dados
 
 if __name__ == '__main__':
+    dataset_file = os.path.join(root_dir,'datasets/dados_coletados.csv')
     # Abre o dataset
     try:
-        df = pd.read_csv('datasets/dados_coletados.csv')
+        df = pd.read_csv(dataset_file)
     except FileNotFoundError:
         df = pd.DataFrame()
     
     # Carrega os itens de busca
-    with open('busca.json','r') as file:
+    with open(os.path.join(root_dir,'busca.json'),'r') as file:
         busca = json.loads(file.read())
     
     # Transforma os resultados em DataFrame
@@ -85,6 +88,6 @@ if __name__ == '__main__':
     
     # Concatena os DataFrames e salva o arquivo
     df = pd.concat(dfs)
-    if not os.path.exists('datasets'):
-        os.mkdir('datasets')
-    df.to_csv('datasets/dados_coletados.csv',index=False)
+    if not os.path.exists(os.path.join(root_dir,'datasets')):
+        os.mkdir(os.path.join(root_dir,'datasets'))
+    df.to_csv(dataset_file,index=False)
