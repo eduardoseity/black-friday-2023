@@ -62,6 +62,17 @@ Para rodar o script utilizei um Raspberry Pi 3 rodando o Ubuntu Server 23.04.
 <br>Clonei este repositório em uma pasta e configurei a execução diária do script utilizando o `crontab` que é um recurso capaz de executar comandos agendados dentro do sistema.
 Este [link](https://guialinux.uniriotec.br/crontab/)<sup>[1]</sup> possui uma explicação sobre o funcionamento deste recurso.
 
+Adicionei um servidor Flask ao código `flask/app.py`<br>
+Então podemos rodar o comando abaixo:
+> python3 app.py
+
+
+E consumir os dados utilizando
+
+> https://localhost:4000/getData
+
+Que vai retornar um json com todos os dados coletados até o momento
+
 ## 6. Transformar os dados em informação de forma gráfica
 Em andamento...
 ## 7. Analisar os resultados
