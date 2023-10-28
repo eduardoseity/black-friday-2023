@@ -73,6 +73,9 @@ E consumir os dados utilizando
 
 Que vai retornar um json com todos os dados coletados até o momento
 
+Para rodar esse servidor automaticamente toda vez que ele cair ou o sistema for reiniciado é preciso criar um serviço e registrá-lo.<br>
+[Aqui](https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/)<sup>[2]</sup> está um bom tutorial de como fazer isso em Linux.
+
 ## 6. Transformar os dados em informação de forma gráfica
 Em andamento...
 ## 7. Analisar os resultados
@@ -84,9 +87,11 @@ Em andamento...
 ![Static Badge](https://img.shields.io/badge/python-3.10-blue)
 ![Static Badge](https://img.shields.io/badge/requests-yellow)
 ![Static Badge](https://img.shields.io/badge/pandas-brown)
+![Static Badge](https://img.shields.io/badge/flask-purple)
 
 ## Referências
-[1] https://guialinux.uniriotec.br/crontab/
+[1] https://guialinux.uniriotec.br/crontab/<br>
+[2] https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/
 
 ### Keep in touch
 - https://www.github.com/eduardoseity
