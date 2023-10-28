@@ -14,4 +14,4 @@ def get_data():
     return pd.read_csv(os.path.join(root_dir,'datasets/dados_coletados.csv'),index_col=False).to_json(orient='records')
 
 if __name__ == '__main__':
-    app.run(port=4000,debug=True)
+    app.run(port=4000,host='0.0.0.0')
