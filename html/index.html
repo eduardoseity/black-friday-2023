@@ -1,0 +1,142 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Friday 2023</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+    <script>
+        var jsonData;
+        fetch("http://localhost:4000/getData").then(
+            (response) => {
+                return response.json();
+            }
+        ).then(
+            (data) => {
+                jsonData = data;
+            }
+        ).then(
+            () => {
+                // console.log(jsonData);
+            }
+        );
+
+        async function showBoxPlot(reference) {
+            return await fetch("http://localhost:4000/getSummarizedData?reference="+reference).then(
+                (response) => {
+                    return response.json();
+                }
+            ).then(
+                (data) => {
+                    var summary = [];
+                    data.forEach(element => {
+                        let y = []
+                        date = Object.keys(element)[0]
+                        element[date].forEach(item => {y.push(item['Preço'])})
+                        summary.push({
+                            y: y,
+                            type: 'violin',
+                            name: date,
+                            marker:{
+                                color: 'rgb(214,12,140)'
+                            },
+                            box: {
+                                visible: true,
+                            }
+                        })
+                    });
+                    plot = document.getElementById('plot');
+                    var layout = {
+                        title: 'Gráfico de densidade '+reference,
+                        showlegend: false,
+                    };
+                    var config = {
+                        responsive: true,
+                    }
+                    // return summary;
+                    Plotly.newPlot(plot, summary, layout, config);
+                }
+            )
+        }
+
+        async function showMeanPlot(reference) {
+            return await fetch("http://localhost:4000/getMeanData?reference="+reference).then(
+                (response) => {
+                    return response.json();
+                }
+            ).then(
+                (data) => {
+                    var summary = [];
+                    let y = [];
+                    let x = [];
+                    data.forEach(element => {
+                        x.push(Object.keys(element)[0]);
+                        y.push(Object.values(element)[0]);
+                    });
+                    var trace = {
+                        x: x,
+                        y: y,
+                        mode: 'markers+lines+text',
+                        type: 'scatter',
+                        text: y,
+                        textfont: {
+                            family: 'sans serif',
+                            size: 10,
+                            color: '#1f77b4'
+                        },
+                        textposition: 'top',
+                    };
+                    plot = document.getElementById('plot2');
+                    var layout = {
+                        title: 'Média dos preços '+reference,
+                        showlegend: false,
+                        yaxis: { 
+                            tickformat: ".00f",
+                        },
+                        annotations: [
+                            {
+                                x: '24/11/23',
+                                y: y[26],
+                                xref: 'x',
+                                yref: 'y',
+                                text: 'Black Friday',
+                                showarrow: true,
+                                arrowhead: 1,
+                                ax: 0,
+                                ay: 100,
+                                font: {
+                                    family: 'sans serif',
+                                    size: 16,
+                                    color: 'red'
+                                },
+                                arrowcolor: 'red',
+                            },
+                        ],
+                    };
+                    var config = {
+                        responsive: true,
+                    }
+                    // return trace;
+                    Plotly.newPlot(plot, [trace], layout, config);
+                }
+            )
+        }
+
+        function updatePlots(reference) {
+            showBoxPlot(reference);
+            showMeanPlot(reference);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <select id="reference" onchange="updatePlots(this.value)">
+            <option value="Samsung Galaxy A14 5g 128GB">Samsung Galaxy A14 5g 128GB</option>
+            <option value="Poco X5 Pro 5g 128GB">Poco X5 Pro 5g 128GB</option>
+            <option value="iPhone 15 Pro Max 256GB">iPhone 15 Pro Max 256GB</option>
+        </select>
+    </div>
+    <div id="plot" style="width:100%;height:500px;"></div>
+    <div id="plot2" style="width:100%;height:500px;"></div>
+    <script>updatePlots(document.getElementById('reference').value)</script>
+</body>
+</html>
