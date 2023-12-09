@@ -3,7 +3,7 @@
 ![Static Badge](https://img.shields.io/badge/requests-yellow)
 ![Static Badge](https://img.shields.io/badge/pandas-brown)
 ![Static Badge](https://img.shields.io/badge/flask-purple)
-![Static Badge](https://img.shields.io/badge/plotly.js-orange)
+![Static Badge](https://img.shields.io/badge/plotly.js-orange)<br>
 Um projeto para analisar os preços de produtos até o dia da Black Friday
 
 ## Introdução
