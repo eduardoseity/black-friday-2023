@@ -1,4 +1,9 @@
 # Black Friday 2023 🔥
+![Static Badge](https://img.shields.io/badge/python-3.10-blue)
+![Static Badge](https://img.shields.io/badge/requests-yellow)
+![Static Badge](https://img.shields.io/badge/pandas-brown)
+![Static Badge](https://img.shields.io/badge/flask-purple)
+![Static Badge](https://img.shields.io/badge/plotly.js-orange)
 Um projeto para analisar os preços de produtos até o dia da Black Friday
 
 ## Introdução
@@ -140,15 +145,49 @@ Estes foram os resultados obtidos.<br>
 <img src='./assets/images/densidade-iphone.png'><br>
 <img src='./assets/images/media-iphone.png'><br>
 ## 7. Analisar os resultados
-Em andamento...
-## 8. Comprar o celular
-Em andamento...
+Vamos começar analisando os gráficos das médias.<br>
+<img src='./assets/images/media-samsung.png'><br>
+A primeira coisa que nos chama a atenção no gráfico acima é que o preço médio deste celular foi caindo até o dia da Black Friday e inclusive nos dias seguintes.<br>
+Então parece de fato uma boa opção.<br>
+<img src='./assets/images/media-poco.png'><br>
+Para este celular não houveram grandes diferenças no preço médio ao longo do mês de novembro e podemos ver que em dois dias específicos após a Black Friday a média subiu bastante.<br>
+<img src='./assets/images/media-iphone.png'><br>
+O celular acima apresenta uma queda no preço médio no dia da Black Friday e posteriormente também. Porém, note que nos dias antecedem a data de 06/11 o preço médio já estava bem baixo, menor ainda do que no dia da Black Friday.
 
-## Tecnologias utilizadas
-![Static Badge](https://img.shields.io/badge/python-3.10-blue)
-![Static Badge](https://img.shields.io/badge/requests-yellow)
-![Static Badge](https://img.shields.io/badge/pandas-brown)
-![Static Badge](https://img.shields.io/badge/flask-purple)
+Vamos focar naquela que parece ser a melhor opção.<br>
+<img src='./assets/images/densidade-samsung.png'><br>
+<img src='./assets/images/media-samsung.png'><br>
+Se olharmos o gráfico de `violino` com atenção podemos ver que no período de 30/10 à 15/11 a "ponta" superior do violino está bem alta em relação aos demais períodos. Quanto mais afastada a "ponta" (superior ou inferior) do `violino` está significa que existem pontos mais isolados dos demais. São considerados <i>pontos fora da curva</i> ou `outliers`. Esses pontos são prejudiciais e podem levar a uma avaliação errada do conjunto de dados.<br>
+A média, por exemplo, é uma medida que é altamente influenciada por esses <i>pontos fora da curva</i>, ou seja, os pontos distantes irão "puxar" a média para cima ou para baixo. Já a <b>`mediana`</b> é uma medida que não sofre tanta influência desses pontos distantes. Isso se dá por conta da forma como cada uma é calculada. Resumidamente a <b>`média`</b> e a soma de todos os pontos dividido pela quantidade total de pontos. Já a <b>`mediana`</b> é o valor central do conjunto quando todos os pontos são ordenados numericamente. [Aqui](https://support.zendesk.com/hc/pt-br/articles/4408839402906-Média-versus-Mediana)<sup>[5]</sup> você encontra uma explicação sobre `média` e `mediana`.
+
+Dessa forma vamos olhar novamente para os gráficos, mas dessa vez incluindo a `mediana`.<br>
+<img src='./assets/images/densidade-samsung.png'><br>
+<img src='./assets/images/media-mediana-samsung.png'><br>
+Observe agora que temos a `mediana` representada por pontos laranja. Esses pontos estão bem distantes da `média` quando temos <i>pontos fora da curva</i> no gráfico de `violino`. Já quando temos um `violino` não tão "esticado" a `média` e a `mediana` ficam bem próximas. Neste caso podemos concluir que das amostras coletadas alguns anúncios praticavam um preço acima da maioria antes do dia 16/11 e esses preços foram se normalizando após essa data.
+
+Mas vamos observar agora qual é o preço mínimo encontrado para cada amostra.<br>
+<img src='./assets/images/media-mediana-minimo-samsung.png'><br>
+Aqui vemos que dentre os anúncios mais baratos tivemos uma redução próximo ao dia da Black Friday.<br>
+Então, para concluir a análise, vou considerar:
+- A `mediana` do período 27/10 à 23/11 em comparação à `mediana` do dia 24/11
+- A média dos menores preços do período 27/10 à 23/11 em comparação ao menor preço do dia 24/11
+
+<img src='./assets/images/infografico.jpeg'><br>
+Acima temos o resumo dos três aparelhos e podemos ver que o primeiro aparelho apresentou uma redução tanto no preço geral quanto quando consideramos os menores preços.
+O segundo aparelho acabou apresentando um aumento no preço e o terceiro apresentou uma redução somente quando olhamos para o preço geral.
+
+## 8. Comprar o celular
+E no final das contas, qual celular eu comprei?<br>
+Nenhum dos três!<br>
+Eu já estava de olho no segundo aparelho, mas pra minha infelicidade ele foi o menos vantajoso. No entanto, encontrei uma versão dele mais básica (versão não Pro) por R$1.500,00 e com armazenamento de 256GB ao invés de 128GB o que para mim é mais interessante.
+
+## Conclusão e considerações finais
+Com este projeto pudemos coletar e analisar dados do Mercado Livre de uma forma sistêmica, isso significa que podemos incluir mais produtos de interesse para fazer a coleta de forma automática e analisar os dados utilizando os mesmos gráficos sem dificuldades.<br>
+Este é um bom projeto para monitoramento de preços podendo ser usado para adquirir um determinado produto no momento mais oportuno ou, se você for um vendedor, para comparar o preço do seu produto com o que é praticado pelos demais vendedores.<br>
+Algumas melhorias que podem ser aplicadas a este projeto:
+- Coletar dados de outras fontes
+- Aumentar o número de amostras a cada coleta
+- Considerar a reputação dos anunciantes para eliminar anúncios suspeitos
 
 ## Referências
 [1] https://guialinux.uniriotec.br/crontab/<br>

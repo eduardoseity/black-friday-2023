@@ -43,6 +43,23 @@ def get_mean_data():
 
     return data
 
+@app.route('/getMeanAndMedianData')
+def get_mean_and_median_data():
+    reference = request.args.get('reference')
+    df = get_df()
+    df = df[df['Referência']==reference]
+    date = df['Data'].unique()
+    data = []
+    for d in date:
+        data.append({d: {
+                'Média': round(df[df['Data']==d]['Preço'].mean(),2),
+                'Mediana': round(df[df['Data']==d]['Preço'].median(),2),
+                'Mínimo': round(df[df['Data']==d]['Preço'].min(),2),
+                'Máximo': round(df[df['Data']==d]['Preço'].max(),2),
+            }})
+
+    return data
+
 
 if __name__ == '__main__':
     app.run(port=4000,host='0.0.0.0',debug=True)

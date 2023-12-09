@@ -121,9 +121,118 @@
             )
         }
 
+        async function showMeanAndMedianPlot(reference) {
+            return await fetch("http://localhost:4000/getMeanAndMedianData?reference="+reference).then(
+                (response) => {
+                    return response.json();
+                }
+            ).then(
+                (data) => {
+                    let y_mean = [];
+                    let y_median = [];
+                    let y_min = [];
+                    let y_max = [];
+                    let x = [];
+                    data.forEach(element => {
+                        x.push(Object.keys(element)[0]);
+                        y_mean.push(Object.values(element)[0]['Média']);
+                        y_median.push(Object.values(element)[0]['Mediana']);
+                        y_min.push(Object.values(element)[0]['Mínimo']);
+                        y_max.push(Object.values(element)[0]['Máximo']);
+                    });
+                    var trace_mean = {
+                        x: x,
+                        y: y_mean,
+                        mode: 'markers+lines+text',
+                        type: 'scatter',
+                        text: y_mean,
+                        name: 'Média',
+                        textfont: {
+                            family: 'sans serif',
+                            size: 10,
+                            color: '#1f77b4'
+                        },
+                        textposition: 'top',
+                    };
+                    var trace_median = {
+                        name: 'Mediana',
+                        x: x,
+                        y: y_median,
+                        mode: 'markers+text',
+                        type: 'scatter',
+                        text: y_median,
+                        textfont: {
+                            family: 'sans serif',
+                            size: 10,
+                            color: '#1f77b4'
+                        },
+                        textposition: 'bottom',
+                    };
+                    var trace_min = {
+                        name: 'Mínimo',
+                        x: x,
+                        y: y_min,
+                        mode: 'line',
+                        type: 'scatter',
+                        textfont: {
+                            family: 'sans serif',
+                            size: 10,
+                            color: 'blue'
+                        },
+                        textposition: 'bottom',
+                    };
+                    var trace_max = {
+                        name: 'Máximo',
+                        x: x,
+                        y: y_max,
+                        mode: 'line',
+                        type: 'scatter',
+                        textfont: {
+                            family: 'sans serif',
+                            size: 10,
+                            color: 'red'
+                        },
+                        textposition: 'bottom',
+                    };
+                    plot = document.getElementById('plot2');
+                    var layout = {
+                        title: 'Média e mediana dos preços '+reference,
+                        showlegend: true,
+                        yaxis: { 
+                            tickformat: ".00f",
+                        },
+                        annotations: [
+                            {
+                                x: '24/11/23',
+                                y: y_mean[26],
+                                xref: 'x',
+                                yref: 'y',
+                                text: 'Black Friday',
+                                showarrow: true,
+                                arrowhead: 1,
+                                ax: 0,
+                                ay: 100,
+                                font: {
+                                    family: 'sans serif',
+                                    size: 16,
+                                    color: 'red'
+                                },
+                                arrowcolor: 'red',
+                            },
+                        ],
+                    };
+                    var config = {
+                        responsive: true,
+                    }
+                    // return trace;
+                    Plotly.newPlot(plot, [trace_mean, trace_median, trace_min], layout, config);
+                }
+            )
+        }
+
         function updatePlots(reference) {
             showBoxPlot(reference);
-            showMeanPlot(reference);
+            showMeanAndMedianPlot(reference);
         }
     </script>
 </head>
